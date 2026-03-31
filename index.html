@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detector de Somnolencia · IA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <header>
+      <h1>👁️ Detector de Somnolencia</h1>
+      <p class="subtitle">Detección en tiempo real con IA · 100% en el navegador</p>
+    </header>
+
+    <main>
+      <div class="video-wrapper">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="canvas"></canvas>
+        <div id="alert-overlay" class="alert-overlay hidden">
+          ⚠️ SOMNOLENCIA DETECTADA
+        </div>
+      </div>
+
+      <div class="panel">
+
+        <div class="status-card" id="status-card">
+          <span class="status-icon" id="status-icon">⏳</span>
+          <span class="status-text" id="status-text">Iniciando…</span>
+        </div>
+
+        <div class="card">
+          <div class="card-label">EAR — Apertura ocular</div>
+          <div class="card-value" id="ear-value">—</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="ear-bar"></div>
+            <div class="bar-threshold"></div>
+          </div>
+          <div class="bar-legend">
+            <span>Cerrado</span>
+            <span class="threshold-label">↑ 0.25</span>
+            <span>Abierto</span>
+          </div>
+        </div>
+
+        <div class="card row">
+          <div>
+            <div class="card-label">Microsueños</div>
+            <div class="card-value accent" id="drowsy-count">0</div>
+          </div>
+          <div>
+            <div class="card-label">Tiempo alerta</div>
+            <div class="card-value" id="alert-timer">—</div>
+          </div>
+        </div>
+
+        <div class="card loading-card" id="loading-card">
+          <div class="spinner"></div>
+          <span id="loading-text">Cargando modelos de IA…</span>
+        </div>
+
+        <div class="card info">
+          <div class="card-label">Cómo funciona</div>
+          <ul>
+            <li>Detecta 68 puntos del rostro en tiempo real</li>
+            <li>Calcula el EAR (Eye Aspect Ratio) de cada ojo</li>
+            <li>EAR &lt; 0.25 durante 1.5 s = alerta de somnolencia</li>
+          </ul>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      face-api.js + TensorFlow.js &nbsp;·&nbsp; sin backend &nbsp;·&nbsp;
+      <a href="https://github.com/Asier-Comba/Detector_de_somnolencia" target="_blank">GitHub</a>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

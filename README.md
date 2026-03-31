@@ -4,8 +4,6 @@
 
 ![face-api.js](https://img.shields.io/badge/face--api.js-0.22.2-7c6fff?style=flat-square)
 ![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-latest-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
-![Sin backend](https://img.shields.io/badge/backend-ninguno-00e676?style=flat-square)
-![Licencia](https://img.shields.io/badge/licencia-MIT-blue?style=flat-square)
 
 ---
 

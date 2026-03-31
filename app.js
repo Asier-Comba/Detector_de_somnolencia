@@ -2,11 +2,13 @@
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const MODEL_URL     = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights';
-const EAR_THRESHOLD = 0.25;  // below this → eye is closing
-const ALERT_FRAMES  = 15;    // consecutive low-EAR frames to trigger alert (~1.5 s at ~10 fps)
+const EAR_THRESHOLD = 0.28;  // below this → eye is closing (0.28 catches half-closed eyes)
+const ALERT_FRAMES  = 8;     // consecutive low-EAR frames to trigger alert (~0.8 s at ~10 fps)
+const RESET_FRAMES  = 4;     // consecutive open frames required to cancel the alert
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let drowsyFrames = 0;
+let openFrames   = 0;
 let drowsyCount  = 0;
 let isAlerting   = false;
 let alertStart   = null;
@@ -133,6 +135,7 @@ function drawEye(pts, ear) {
 function processState(ear) {
   if (ear < EAR_THRESHOLD) {
     drowsyFrames++;
+    openFrames = 0;
 
     if (drowsyFrames >= ALERT_FRAMES) {
       if (!isAlerting) {
@@ -150,17 +153,22 @@ function processState(ear) {
     }
 
   } else {
-    drowsyFrames = 0;
+    openFrames++;
 
-    if (isAlerting) {
-      isAlerting = false;
-      alertStart  = null;
-      stopBeeping();
-      alertOverlay.classList.add('hidden');
-      timerEl.textContent = '—';
+    // Only reset drowsy counter after several consecutive open frames (avoids blinking resets)
+    if (openFrames >= RESET_FRAMES) {
+      drowsyFrames = 0;
+
+      if (isAlerting) {
+        isAlerting = false;
+        alertStart  = null;
+        stopBeeping();
+        alertOverlay.classList.add('hidden');
+        timerEl.textContent = '—';
+      }
+
+      setStatus('attentive', '👁️', 'Atento');
     }
-
-    setStatus('attentive', '👁️', 'Atento');
   }
 }
 

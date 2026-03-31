@@ -42,7 +42,7 @@ Webcam → TinyFaceDetector → 68 landmarks → EAR → Umbral → Alerta
 | **1. Detección facial** | `face-api.js` localiza la cara en cada frame usando TinyFaceDetector |
 | **2. Landmarks** | Mapea 68 puntos clave del rostro, incluyendo los 6 puntos de cada ojo |
 | **3. Cálculo EAR** | Calcula el Eye Aspect Ratio de cada ojo con distancias euclídeas |
-| **4. Umbral** | Si EAR < 0.25 durante ≥ 15 frames consecutivos (~1.5 s) → alerta |
+| **4. Umbral** | Si EAR < 0.28 durante ≥ 8 frames consecutivos (~0.8 s) → alerta |
 | **5. Alerta** | Overlay rojo parpadeante + pitido sonoro + contador de microsueños |
 
 ### Fórmula EAR (Eye Aspect Ratio)

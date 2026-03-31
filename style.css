@@ -201,10 +201,10 @@ main {
   width: 0%;
 }
 
-/* threshold 0.25 → 50% of 0–0.5 range */
+/* threshold 0.28 → 56% of 0–0.5 range */
 .bar-threshold {
   position: absolute;
-  top: -4px; left: 50%;
+  top: -4px; left: 56%;
   width: 2px; height: 18px;
   background: var(--yellow);
   border-radius: 1px;
